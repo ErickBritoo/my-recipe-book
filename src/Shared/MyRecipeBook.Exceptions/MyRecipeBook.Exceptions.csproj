@@ -6,4 +6,37 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="ResourceMessagesExceptions.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ResourceMessagesExceptions.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="ResourceMessagesExceptions.pt-BR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ResourceMessagesExceptions.pt-BR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="ResourceMessagesExceptions.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ResourceMessagesExceptions.es.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="ResourceMessagesExceptions.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ResourceMessagesExceptions.resx</DependentUpon>
+      </Compile>
+      <Compile Update="ResourceMessagesExceptions.pt-BR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ResourceMessagesExceptions.pt-BR.resx</DependentUpon>
+      </Compile>
+      <Compile Update="ResourceMessagesExceptions.es.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ResourceMessagesExceptions.es.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
