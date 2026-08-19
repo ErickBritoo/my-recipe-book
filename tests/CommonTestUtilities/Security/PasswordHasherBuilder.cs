@@ -1,24 +1,25 @@
 using Moq;
-using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Domain.Security.PasswordHashing;
 
-namespace CommonTestUtilities.Repositories;
+namespace CommonTestUtilities.Security;
 
 public class PasswordHasherBuilder
 {
     private readonly Mock<IPasswordHasher> _passwordHasherMock;
-    
-    public PasswordHasherBuilder(string? password = null)
+
+    public PasswordHasherBuilder()
     {
         _passwordHasherMock = new Mock<IPasswordHasher>();
 
         _passwordHasherMock.Setup(passwordHasher => passwordHasher.HashPassword(It.IsAny<string>()))
             .Returns("hashed-password");
-        
-        if (password.IsNotEmpty())
-            _passwordHasherMock.Setup(passwordHasher => passwordHasher.VerifyPassword(password, string.Empty)).Returns(true);
     }
 
     public IPasswordHasher Build() => _passwordHasherMock.Object;
-    
+
+    public void VerifyPassword(string password)
+    {
+        _passwordHasherMock.Setup(passwordHasher => passwordHasher.VerifyPassword(password, It.IsAny<string>()))
+            .Returns(true);
+    }
 }

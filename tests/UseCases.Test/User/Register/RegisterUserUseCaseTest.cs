@@ -1,5 +1,6 @@
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Security;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Exceptions;
@@ -41,8 +42,8 @@ public class RegisterUserUseCaseTest
 
         exceptionResult.ShouldSatisfyAllConditions(exception =>
         {
-            exception.ErrorMessages.Count.ShouldBe(1);
-            exception.ErrorMessages.ShouldContain(ResourceMessagesExceptions.VALIDATION_NAME_REQUIRED);
+            exception.GetErrorMessages().Count.ShouldBe(1);
+            exception.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.VALIDATION_NAME_REQUIRED);
         });
     }
 
@@ -58,8 +59,8 @@ public class RegisterUserUseCaseTest
         
         exceptionResult.ShouldSatisfyAllConditions(exception =>
         {
-            exception.ErrorMessages.Count.ShouldBe(1);
-            exception.ErrorMessages.ShouldContain(ResourceMessagesExceptions.VALIDATION_EMAIL_ALREADY_EXISTS);
+            exception.GetErrorMessages().Count.ShouldBe(1);
+            exception.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.VALIDATION_EMAIL_ALREADY_EXISTS);
         });
     }
     
@@ -69,7 +70,7 @@ public class RegisterUserUseCaseTest
         var userWriteOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
         var passwordHasher = new PasswordHasherBuilder().Build();
         var userReadOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
-
+        
         if (email.IsNotEmpty())
         {
             userReadOnlyRepositoryBuilder.ExistActiveUserWithEmail(email);
