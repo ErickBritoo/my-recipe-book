@@ -36,4 +36,7 @@
     <data name="VALIDATION_EMAIL_INVALID" xml:space="preserve">
         <value>O formato do e-mail é inválido.</value>
     </data>
+    <data name="VALIDATION_LOGIN_INVALID" xml:space="preserve">
+        <value>Email ou senha inválidos</value>
+    </data>
 </root>

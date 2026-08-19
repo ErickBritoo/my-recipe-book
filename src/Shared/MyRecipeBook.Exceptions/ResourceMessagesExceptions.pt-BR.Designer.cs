@@ -80,5 +80,11 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("VALIDATION_EMAIL_INVALID", resourceCulture);
             }
         }
+        
+        internal static string VALIDATION_LOGIN_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_LOGIN_INVALID", resourceCulture);
+            }
+        }
     }
 }
