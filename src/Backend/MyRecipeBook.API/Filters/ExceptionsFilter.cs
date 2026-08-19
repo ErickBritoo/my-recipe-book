@@ -10,8 +10,8 @@ public class ExceptionsFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is MyRecipeBookExceptions)
-            ThrowException(context);
+        if (context.Exception is MyRecipeBookExceptions exception)
+            ThrowException(context, exception);
         else
             ThrowUnknowException(context);
     }
@@ -23,13 +23,9 @@ public class ExceptionsFilter : IExceptionFilter
         context.Result = new ObjectResult(new ResponseErrorJson(ResourceMessagesExceptions.UNKNOW_ERROR));
     }
 
-    private static void ThrowException(ExceptionContext context)
+    private static void ThrowException(ExceptionContext context, MyRecipeBookExceptions exception)
     {
-        if (context.Exception is ErrorOnValidationException exception)
-        {
-            
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new BadRequestObjectResult(new ResponseErrorJson(exception.ErrorMessages));
-        }
+        context.HttpContext.Response.StatusCode = (int)exception.GetStatusCodes();
+        context.Result = new ObjectResult(new ResponseErrorJson(exception.GetErrorMessages()));
     }
 }
