@@ -1,13 +1,19 @@
+using CommonTestUtilities.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MyRecipeBook.Domain.Security.PasswordHashing;
+using MyRecipeBook.Infrastructure.DataAcess;
 using Testcontainers.MySql;
+using WebApi.Test.Resources;
 using Xunit;
 
 namespace WebApi.Test;
 
 public class MyRecipeBookApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
+    public UserIdentiyManager User1 { get; private set; }
     private readonly MySqlContainer _mySqlContainer;
 
     public MyRecipeBookApplicationFactory()
@@ -37,6 +43,20 @@ public class MyRecipeBookApplicationFactory : WebApplicationFactory<Program>, IA
     public async ValueTask InitializeAsync()
     {
         await _mySqlContainer.StartAsync();
+
+        await using var scope =  Services.CreateAsyncScope();
+
+        var dbContext = scope.ServiceProvider.GetRequiredService<MyRecipeBookDbContext>();
+        var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+
+        var (user, password) = UserBuilder.Build();
+
+        user.Password = passwordHasher.HashPassword(password);
+        
+        await dbContext.Users.AddAsync(user);
+        await dbContext.SaveChangesAsync();
+
+        User1 = new UserIdentiyManager(user, password);
     }
 
     public override async ValueTask DisposeAsync()
