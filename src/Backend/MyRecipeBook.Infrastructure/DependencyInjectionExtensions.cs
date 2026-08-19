@@ -18,20 +18,17 @@ public static class DependencyInjectionExtensions
     {
         public void AddInfrastructure(IConfiguration configuration)
         {
+            services.AddRepositories();
+
             services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
-            
-            services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
-            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
-            
+
             services.AddDbContext<MyRecipeBookDbContext>(config =>
             {
                 var connectionString = configuration.GetConnectionString("DbConnection")!;
-                
+
                 config.UseMySQL(connectionString);
             });
-            
-            services.AddScoped<IUnityOfWork, UnityOfWork>();
-            
+
             services.AddFluentMigratorCore().ConfigureRunner(rb =>
             {
                 rb.AddMySql5().WithGlobalConnectionString(serviceProvider =>
@@ -42,6 +39,14 @@ public static class DependencyInjectionExtensions
                     })
                     .ScanIn(Assembly.Load("MyRecipeBook.Infrastructure")).For.All();
             });
+        }
+
+        private void AddRepositories()
+        {
+            services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+
+            services.AddScoped<IUnityOfWork, UnityOfWork>();
         }
     }
 }
