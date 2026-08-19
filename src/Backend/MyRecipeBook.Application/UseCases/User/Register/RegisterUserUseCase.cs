@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
 using FluentValidation.Results;
 using Mapster;
 using MyRecipeBook.Communication.Requests;
@@ -18,21 +16,20 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
     private readonly IUserReadOnlyRepository _userReadOnlyRepository;
     private readonly IUnityOfWork _unityOfWork;
-    
-    
+
     public RegisterUserUseCase(
-        IPasswordHasher passwordHasher, 
+        IPasswordHasher passwordHasher,
         IUserWriteOnlyRepository userWriteOnlyRepository,
         IUserReadOnlyRepository userReadOnlyRepository,
         IUnityOfWork unityOfWork
-        )
+    )
     {
         _passwordHasher = passwordHasher;
         _userWriteOnlyRepository = userWriteOnlyRepository;
         _userReadOnlyRepository = userReadOnlyRepository;
         _unityOfWork = unityOfWork;
     }
-    
+
     public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
     {
         await ValidateAndThrowOnFailures(request);
@@ -57,12 +54,13 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var res = await validator.ValidateAsync(request);
 
         var existUserActiveWithEmail = await _userReadOnlyRepository.ExistActiveUserWithEmail(request.Email);
-        
+
         if (existUserActiveWithEmail)
         {
-            res.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesExceptions.VALIDATION_EMAIL_ALREADY_EXISTS));
+            res.Errors.Add(new ValidationFailure(string.Empty,
+                ResourceMessagesExceptions.VALIDATION_EMAIL_ALREADY_EXISTS));
         }
-        
+
         if (res.IsValid == false)
         {
             throw new ErrorOnValidationException(res.Errors.Select(e => e.ErrorMessage).ToList());

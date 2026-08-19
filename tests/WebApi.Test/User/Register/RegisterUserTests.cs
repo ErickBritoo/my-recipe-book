@@ -1,11 +1,8 @@
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Json;
 using System.Text.Json;
 using CommonTestUtilities.Requests;
-using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Exceptions;
-using MyRecipeBook.Infrastructure.DataAcess;
 using Shouldly;
 using WebApi.Test.InlineData;
 using Xunit;
