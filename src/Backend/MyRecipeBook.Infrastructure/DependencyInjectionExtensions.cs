@@ -6,9 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.PasswordHashing;
+using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Infrastructure.DataAcess;
 using MyRecipeBook.Infrastructure.DataAcess.Repositories;
 using MyRecipeBook.Infrastructure.Security.PasswordHashing;
+using MyRecipeBook.Infrastructure.Security.Tokens.AcessToken;
 
 namespace MyRecipeBook.Infrastructure;
 
@@ -19,7 +21,8 @@ public static class DependencyInjectionExtensions
         public void AddInfrastructure(IConfiguration configuration)
         {
             services.AddRepositories();
-
+            services.AddTokensHandler(configuration);
+            
             services.AddScoped<IPasswordHasher, Argon2PasswordHasher>();
 
             services.AddDbContext<MyRecipeBookDbContext>(config =>
@@ -47,6 +50,17 @@ public static class DependencyInjectionExtensions
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
 
             services.AddScoped<IUnityOfWork, UnityOfWork>();
+        }
+        
+        private void AddTokensHandler(IConfiguration configuration)
+        {
+            services.AddScoped<IAcessTokenGenerator>(_ =>
+            {
+                var expirationTimeMinutes = configuration.GetValue<uint>("Jwt:ExpirationTimeMinutes");
+                var signatureKey = configuration.GetValue<string>("Jwt:SigningKey")!;
+
+                return new JwtTokenHandler(expirationTimeMinutes, signatureKey);
+            });
         }
     }
 }
