@@ -41,8 +41,8 @@ public class LoginWithEmailAndPasswordTests : BaseIntegrationTest
         var responseData = await JsonDocument.ParseAsync(responseBody, cancellationToken: cancellationToken);
         
         responseData.RootElement.GetProperty("name").GetString().ShouldBe(_user1.GetName());
-        responseData.RootElement.GetProperty("tokens").GetProperty("acessToken").GetString().ShouldBeEmpty();
-        responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldBeEmpty();    
+        responseData.RootElement.GetProperty("tokens").GetProperty("acessToken").GetString().ShouldNotBeNullOrEmpty();
+        responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldBeNullOrEmpty();    
     }
 
 

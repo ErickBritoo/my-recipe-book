@@ -32,8 +32,8 @@ public class RegisterUserTests : BaseIntegrationTest
         var responseData = await JsonDocument.ParseAsync(responseBody, cancellationToken: cancellationToken);
         
         responseData.RootElement.GetProperty("name").GetString().ShouldBe(request.Name);
-        responseData.RootElement.GetProperty("tokens").GetProperty("acessToken").GetString().ShouldBeEmpty();
-        responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldBeEmpty();
+        responseData.RootElement.GetProperty("tokens").GetProperty("acessToken").GetString().ShouldNotBeNullOrEmpty();
+        responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldBeNullOrEmpty();
         
         var existUser = dbContext.Users.Any(user => user.Active && user.Name.Equals(request.Name) && user.Email.Equals(request.Email));
         

@@ -30,7 +30,7 @@ public class LoginWithEmailAndPasswordUseCaseTest
         result.ShouldNotBeNull();
         result.Tokens.ShouldNotBeNull();
         result.Name.ShouldBe(user.Name);
-        result.Tokens.AcessToken.ShouldBeNullOrEmpty();
+        result.Tokens.AcessToken.ShouldNotBeNullOrEmpty();
         result.Tokens.RefreshToken.ShouldBeNullOrEmpty();
     }
 
@@ -76,13 +76,14 @@ public class LoginWithEmailAndPasswordUseCaseTest
     {
         var readOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
         var passwordHasherBuilder = new PasswordHasherBuilder();
-        
+        var acessTokenGenerator = AcessTokenGeneratorBuilder.Build();
+
         if (user is not null)
             readOnlyRepositoryBuilder.GetByEmail(user);
 
         if (password is not null)
             passwordHasherBuilder.VerifyPassword(password);
 
-        return new LoginWithEmailAndPasswordUseCase(readOnlyRepositoryBuilder.Build(), passwordHasherBuilder.Build());
+        return new LoginWithEmailAndPasswordUseCase(readOnlyRepositoryBuilder.Build(), passwordHasherBuilder.Build(), acessTokenGenerator);
     }
 }
