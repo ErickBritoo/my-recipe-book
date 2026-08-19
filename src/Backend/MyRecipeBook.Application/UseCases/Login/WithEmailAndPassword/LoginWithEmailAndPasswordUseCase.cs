@@ -1,5 +1,6 @@
 using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
+using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.PasswordHashing;
 using MyRecipeBook.Domain.Security.Tokens;
@@ -27,7 +28,7 @@ public class LoginWithEmailAndPasswordUseCase : ILoginWithEmailAndPasswordUseCas
     {
         var user = await _readOnlyRepository.GetByEmail(request.Email);
 
-        if (user is null)
+        if (user is null || string.IsNullOrWhiteSpace(request.Password))
             throw new InvalidLoginException();
 
         var isPasswordValid = _passwordHasher.VerifyPassword(request.Password, user.Password);
