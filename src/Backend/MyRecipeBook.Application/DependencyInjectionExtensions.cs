@@ -1,6 +1,7 @@
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Application.UseCases.Login.WithEmailAndPassword;
+using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
 
 namespace MyRecipeBook.Application;
@@ -13,6 +14,7 @@ public static class DependencyInjectionExtensions
         {
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<ILoginWithEmailAndPasswordUseCase, LoginWithEmailAndPasswordUseCase>();
+            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         }
     }
 }
