@@ -1,5 +1,7 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.Extensions.DependencyInjection;
+using MyRecipeBook.Domain.Extensions;
 using MyRecipeBook.Infrastructure.DataAcess;
 using Xunit;
 
@@ -28,10 +30,25 @@ public class BaseIntegrationTest : IClassFixture<MyRecipeBookApplicationFactory>
         return _httpClient.PostAsJsonAsync(requestUri, request, cancellationToken);
     }
 
+    protected Task<HttpResponseMessage> Get(string requestUri, CancellationToken cancellationToken,
+        string culture = "en", string acessToken = "")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(acessToken);
+
+        return _httpClient.GetAsync(requestUri, cancellationToken);
+    }
+
     private void ChangeRequestCulture(string culture)
     {
         _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
         _httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(culture);
+    }
+
+    private void AuthorizeRequest(string acessToken)
+    {
+        if (acessToken.IsNotEmpty())
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", acessToken);
     }
 
     public void Dispose()
