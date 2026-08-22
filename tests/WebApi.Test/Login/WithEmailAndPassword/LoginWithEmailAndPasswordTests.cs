@@ -64,7 +64,7 @@ public class LoginWithEmailAndPasswordTests : BaseIntegrationTest
         var expectedMessageException =
             ResourceMessagesExceptions.ResourceManager.GetString("VALIDATION_LOGIN_INVALID", new CultureInfo(culture));
 
-        responseData.RootElement.GetProperty("errors").EnumerateArray().ShouldSatisfyAllConditions(errorMessages =>
+        responseData.RootElement.GetProperty("errorMessages").EnumerateArray().ShouldSatisfyAllConditions(errorMessages =>
         {
             errorMessages.Count().ShouldBe(1);
             errorMessages.ShouldContain(errorMessage => errorMessage.GetString() == (expectedMessageException));

@@ -59,7 +59,7 @@ public class RegisterUserTests : BaseIntegrationTest
 
         var expectedMessageException = ResourceMessagesExceptions.ResourceManager.GetString("VALIDATION_NAME_REQUIRED", new CultureInfo(culture));
         
-        responseData.RootElement.GetProperty("errors").EnumerateArray().ShouldSatisfyAllConditions(errors =>
+        responseData.RootElement.GetProperty("errorMessages").EnumerateArray().ShouldSatisfyAllConditions(errors =>
         {
             errors.Count().ShouldBe(1);
             errors.ShouldContain(errorMessage => errorMessage.GetString() == expectedMessageException);
