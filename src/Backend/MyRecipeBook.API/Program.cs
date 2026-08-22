@@ -3,26 +3,33 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using MyRecipeBook.API.Converts;
 using MyRecipeBook.API.Filters;
+using MyRecipeBook.API.Token;
 using MyRecipeBook.Application;
+using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Infrastructure;
-using MyRecipeBook.Infrastructure.DataAcess;
 using MyRecipeBook.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConvert()));
+builder.Services.AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConvert()));
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAcessTokenProvider, HttpContextTokenProvider>();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCultures = new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("pt-BR"), new CultureInfo("es")};
+    var supportedCultures = new List<CultureInfo>
+        { new CultureInfo("en"), new CultureInfo("pt-BR"), new CultureInfo("es") };
 
     options.DefaultRequestCulture = new RequestCulture("en");
 
@@ -30,13 +37,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
 
     options.RequestCultureProviders = [new AcceptLanguageHeaderRequestCultureProvider()];
-    
 });
 
-builder.Services.AddMvc(options =>
-{
-    options.Filters.Add<ExceptionsFilter>();
-});
+builder.Services.AddMvc(options => { options.Filters.Add<ExceptionsFilter>(); });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
@@ -70,4 +73,4 @@ async Task ExecuteMigrations()
     await using var scope = app.Services.CreateAsyncScope();
 
     await DatabaseMigration.ExecuteMigrations(scope.ServiceProvider);
-} 
+}
