@@ -39,4 +39,13 @@
     <data name="VALIDATION_LOGIN_INVALID" xml:space="preserve">
         <value>Email ou senha inválidos</value>
     </data>
+    <data name="VALIDATION_ACESS_TOKEN_REQUIRED" xml:space="preserve">
+        <value>O token de acesso não pode estar vazio.</value>
+    </data>
+    <data name="VALIDATION_RESOURCE_ACESS_DENIED" xml:space="preserve">
+        <value>Você não tem acesso a este recurso.</value>
+    </data>
+    <data name="TOKEN_TIME_EXPIRED" xml:space="preserve">
+        <value>O token de acesso expirou. Por favor, autentique-se novamente.</value>
+    </data>
 </root>

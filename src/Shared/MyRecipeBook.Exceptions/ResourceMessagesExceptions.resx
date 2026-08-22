@@ -39,4 +39,13 @@
     <data name="VALIDATION_LOGIN_INVALID" xml:space="preserve">
         <value>Invalid email or password</value>
     </data>
+    <data name="VALIDATION_ACESS_TOKEN_REQUIRED" xml:space="preserve">
+        <value>Access Token cannot be empty.</value>
+    </data>
+    <data name="VALIDATION_RESOURCE_ACESS_DENIED" xml:space="preserve">
+        <value>You don't have access to this resource.</value>
+    </data>
+    <data name="TOKEN_TIME_EXPIRED" xml:space="preserve">
+        <value>The access token has expired. Please re-authenticate.</value>
+    </data>
 </root>

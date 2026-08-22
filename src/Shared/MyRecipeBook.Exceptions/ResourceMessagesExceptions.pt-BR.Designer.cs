@@ -86,5 +86,23 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("VALIDATION_LOGIN_INVALID", resourceCulture);
             }
         }
+        
+        internal static string VALIDATION_ACESS_TOKEN_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_ACESS_TOKEN_REQUIRED", resourceCulture);
+            }
+        }
+        
+        internal static string VALIDATION_RESOURCE_ACESS_DENIED {
+            get {
+                return ResourceManager.GetString("VALIDATION_RESOURCE_ACESS_DENIED", resourceCulture);
+            }
+        }
+        
+        internal static string TOKEN_TIME_EXPIRED {
+            get {
+                return ResourceManager.GetString("TOKEN_TIME_EXPIRED", resourceCulture);
+            }
+        }
     }
 }
