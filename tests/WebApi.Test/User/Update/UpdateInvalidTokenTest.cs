@@ -76,7 +76,7 @@ public class UpdateInvalidTokenTest : BaseIntegrationTest
     [Fact]
     public async Task Validate_ShouldBeErrorResponse_WhenUserFromAcessTokenDoesExists()
     {
-        var request = RequestChangePasswordJsonBuilder.Build();
+        var request = RequestUpdateUserJsonBuilder.Build();
         var cancellationToken = TestContext.Current.CancellationToken;
 
         var response = await Put(REQUEST_URI, request, ACESS_TOKEN_NOT_EXISTS_IN_DATABASE, cancellationToken);
