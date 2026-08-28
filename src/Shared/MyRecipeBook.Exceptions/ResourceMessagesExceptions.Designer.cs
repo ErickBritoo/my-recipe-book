@@ -111,5 +111,10 @@ namespace MyRecipeBook.Exceptions {
             }
         }
         
+        public static string VALIDATION_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("VALIDATION_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
     }
 }

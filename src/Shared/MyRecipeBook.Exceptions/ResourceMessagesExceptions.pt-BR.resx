@@ -51,4 +51,7 @@
     <data name="VALIDATION_PASSWORD_MIN_LENGTH" xml:space="preserve">
         <value>A senha deve ter pelos menos 6 caracteres.</value>
     </data>
+    <data name="VALIDATION_CURRENT_PASSWORD" xml:space="preserve">
+        <value>A senha atual informado é incorreta.</value>
+    </data>
 </root>

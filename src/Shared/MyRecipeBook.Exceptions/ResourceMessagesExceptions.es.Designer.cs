@@ -110,5 +110,11 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("VALIDATION_PASSWORD_MIN_LENGTH", resourceCulture);
             }
         }
+        
+        internal static string VALIDATION_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("VALIDATION_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
     }
 }
