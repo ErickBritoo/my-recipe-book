@@ -104,5 +104,12 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("TOKEN_TIME_EXPIRED", resourceCulture);
             }
         }
+        
+        public static string VALIDATION_PASSWORD_MIN_LENGTH {
+            get {
+                return ResourceManager.GetString("VALIDATION_PASSWORD_MIN_LENGTH", resourceCulture);
+            }
+        }
+        
     }
 }

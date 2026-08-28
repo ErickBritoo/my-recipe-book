@@ -48,4 +48,7 @@
     <data name="TOKEN_TIME_EXPIRED" xml:space="preserve">
         <value>The access token has expired. Please re-authenticate.</value>
     </data>
+    <data name="VALIDATION_PASSWORD_MIN_LENGTH" xml:space="preserve">
+        <value>Password must be at least 6 characters.</value>
+    </data>
 </root>
