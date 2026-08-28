@@ -39,6 +39,14 @@ public class BaseIntegrationTest : IClassFixture<MyRecipeBookApplicationFactory>
         return _httpClient.GetAsync(requestUri, cancellationToken);
     }
 
+    protected Task<HttpResponseMessage> Put(string requestUri, object request, string acessToken, CancellationToken cancellationToken, string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(acessToken);
+
+        return _httpClient.PutAsJsonAsync(requestUri, request, cancellationToken);
+    }
+    
     private void ChangeRequestCulture(string culture)
     {
         _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();

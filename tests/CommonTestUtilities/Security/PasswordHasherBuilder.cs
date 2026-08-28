@@ -17,9 +17,11 @@ public class PasswordHasherBuilder
 
     public IPasswordHasher Build() => _passwordHasherMock.Object;
 
-    public void VerifyPassword(string password)
+    public PasswordHasherBuilder VerifyPassword(string password)
     {
         _passwordHasherMock.Setup(passwordHasher => passwordHasher.VerifyPassword(password, It.IsAny<string>()))
             .Returns(true);
+
+        return this;
     }
 }
