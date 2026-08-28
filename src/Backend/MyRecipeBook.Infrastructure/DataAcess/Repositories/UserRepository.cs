@@ -52,4 +52,12 @@ internal sealed class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRe
         _dbContext.Entry(user).Property(u => u.Name).IsModified = true;
         _dbContext.Entry(user).Property(u => u.Email).IsModified = true;
     }
+    
+    public async Task UpdatePassword(Guid userId, string password)
+    {
+        await _dbContext
+            .Users
+            .Where(user => user.Id == userId)
+            .ExecuteUpdateAsync(setter => setter.SetProperty(user => user.Password, password));
+    }
 }
