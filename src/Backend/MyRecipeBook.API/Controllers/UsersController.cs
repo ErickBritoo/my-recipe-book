@@ -26,8 +26,9 @@ public class UsersController : ControllerBase
     }
     
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
     [Authorize]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetUserProfile([FromServices] IGetUserProfileUseCase useCase)
     {
         var result = await useCase.Execute();
