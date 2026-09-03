@@ -54,4 +54,40 @@
     <data name="VALIDATION_CURRENT_PASSWORD" xml:space="preserve">
         <value>A senha atual informado é incorreta.</value>
     </data>
+    <data name="VALIDATION_TITLE_REQUIRED" xml:space="preserve">
+        <value>O título não pode estar vazio.</value>
+    </data>
+    <data name="VALIDATION_TITLE_MAX_LENGTH" xml:space="preserve">
+        <value>O título não pode ter mais de 250 caracteres.</value>
+    </data>
+    <data name="VALIDATION_INGREDIENT_EMPTY" xml:space="preserve">
+        <value>O ingrediente não pode estar vazio.</value>
+    </data>
+    <data name="VALIDATION_INGREDIENT_MAX_LENGTH" xml:space="preserve">
+        <value>O ingrediente não pode exceder 250 caracteres.</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_ORDER_INVALID" xml:space="preserve">
+        <value>A ordem das instruções deve ser maior que zero.</value>
+    </data>
+    <data name="VALIDATION_AT_LEAST_ONE_INSTRUCTION" xml:space="preserve">
+        <value>A receita deve ter pelo menos uma instrução</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_DESCRIPTION_REQUIRED" xml:space="preserve">
+        <value>La descripción del orden de las instrucciones no puede estar vacía.</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_DESCRIPTION_MAX_LENGTH" xml:space="preserve">
+        <value>La descripción de la orden de instrucciones no puede exceder los 2000 caracteres.</value>
+    </data>
+    <data name="VALIDATION_DISH_TYPE_INVALID" xml:space="preserve">
+        <value>Um dos tipos de pratos é inválido.</value>
+    </data>
+    <data name="VALIDATION_COOK_TIME_INVALID" xml:space="preserve">
+        <value>O tempo de preparação selecionado não é válido.</value>
+    </data>
+    <data name="VALIDATION_COOK_TIME_REQUIRED" xml:space="preserve">
+        <value>O tempo de preparação não pode ser vazio.</value>
+    </data>
+    <data name="VALIDATION_AT_LEAST_ONE_DISH_TYPE" xml:space="preserve">
+        <value>A receita deve incluir pelo menos um tipo de prato.</value>
+    </data>
 </root>

@@ -54,4 +54,40 @@
     <data name="VALIDATION_CURRENT_PASSWORD" xml:space="preserve">
         <value>La contraseña actual es incorrecta.</value>
     </data>
+    <data name="VALIDATION_TITLE_REQUIRED" xml:space="preserve">
+        <value>El título no puede estar vacío.</value>
+    </data>
+    <data name="VALIDATION_TITLE_MAX_LENGTH" xml:space="preserve">
+        <value>El título no puede tener más de 250 caracteres.</value>
+    </data>
+    <data name="VALIDATION_INGREDIENT_EMPTY" xml:space="preserve">
+        <value>El ingrediente no puede estar vacío.</value>
+    </data>
+    <data name="VALIDATION_INGREDIENT_MAX_LENGTH" xml:space="preserve">
+        <value>El ingrediente no puede exceder los 250 caracteres.</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_ORDER_INVALID" xml:space="preserve">
+        <value>El orden de las instrucciones debe ser mayor que cero.</value>
+    </data>
+    <data name="VALIDATION_AT_LEAST_ONE_INSTRUCTION" xml:space="preserve">
+        <value>La receta debe tener al menos una instrucción.</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_DESCRIPTION_REQUIRED" xml:space="preserve">
+        <value>A descrição da sequência de instruções não pode estar vazia.</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_DESCRIPTION_MAX_LENGTH" xml:space="preserve">
+        <value>A descrição da sequência de instruções não pode exceder 2000 caracteres.</value>
+    </data>
+    <data name="VALIDATION_DISH_TYPE_INVALID" xml:space="preserve">
+        <value>Uno de los dos tipos de platos no es válido.</value>
+    </data>
+    <data name="VALIDATION_COOK_TIME_INVALID" xml:space="preserve">
+        <value> El tiempo de preparación seleccionado no es válido.</value>
+    </data>
+    <data name="VALIDATION_COOK_TIME_REQUIRED" xml:space="preserve">
+        <value>El tiempo de preparación no puede estar vacío.</value>
+    </data>
+    <data name="VALIDATION_AT_LEAST_ONE_DISH_TYPE" xml:space="preserve">
+        <value>La receta debe tener al menos un tipo de plato.</value>
+    </data>
 </root>

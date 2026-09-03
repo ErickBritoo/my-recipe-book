@@ -116,5 +116,77 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("VALIDATION_CURRENT_PASSWORD", resourceCulture);
             }
         }
+        
+        public static string VALIDATION_TITLE_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_TITLE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_TITLE_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("VALIDATION_TITLE_MAX_LENGTH", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_INGREDIENT_EMPTY {
+            get {
+                return ResourceManager.GetString("VALIDATION_INGREDIENT_EMPTY", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_INGREDIENT_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("VALIDATION_INGREDIENT_MAX_LENGTH", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_INSTRUCTION_ORDER_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_INSTRUCTION_ORDER_INVALID", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_AT_LEAST_ONE_INSTRUCTION {
+            get {
+                return ResourceManager.GetString("VALIDATION_AT_LEAST_ONE_INSTRUCTION", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_INSTRUCTION_DESCRIPTION_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_INSTRUCTION_DESCRIPTION_REQUIRED", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_INSTRUCTION_DESCRIPTION_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("VALIDATION_INSTRUCTION_DESCRIPTION_MAX_LENGTH", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_DISH_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_DISH_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_COOK_TIME_INVALID {
+            get {
+                return ResourceManager.GetString("VALIDATION_COOK_TIME_INVALID", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_COOK_TIME_REQUIRED {
+            get {
+                return ResourceManager.GetString("VALIDATION_COOK_TIME_REQUIRED", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_AT_LEAST_ONE_DISH_TYPE {
+            get {
+                return ResourceManager.GetString("VALIDATION_AT_LEAST_ONE_DISH_TYPE", resourceCulture);
+            }
+        }
     }
 }
