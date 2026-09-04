@@ -6,7 +6,7 @@ public class Recipe : EntityBase
 {
     public string Title { get; set; } = string.Empty;
     public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = [];
-    public ICollection<DishType> DishTypes { get; set; } = [];
+    public ICollection<RecipeDishType> DishTypes { get; set; } = [];
     public ICollection<RecipeInstruction> Instructions { get; set; } = [];
     public CookTime CookTime { get; set; }
     public Guid UserId { get; set; }
