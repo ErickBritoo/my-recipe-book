@@ -84,10 +84,13 @@
     <data name="VALIDATION_COOK_TIME_INVALID" xml:space="preserve">
         <value>The selected preparation time is not valid.</value>
     </data>
-    <data name="VALIDATION_COOK_TIME_REQUIRED" xml:space="preserve">
-        <value>The preparation time cannot be empty. </value>
-    </data>
     <data name="VALIDATION_AT_LEAST_ONE_DISH_TYPE" xml:space="preserve">
         <value>The recipe must include at least one type of dish.</value>
+    </data>
+    <data name="VALIDATION_INSTRUCTION_ORDER_DUPLICATED" xml:space="preserve">
+        <value>Two or more instructions have the same order</value>
+    </data>
+    <data name="VALIDATION_AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
+        <value>The recipe must include at least on ingredient</value>
     </data>
 </root>

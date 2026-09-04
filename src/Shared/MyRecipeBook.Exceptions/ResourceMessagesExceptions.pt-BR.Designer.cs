@@ -177,15 +177,21 @@ namespace MyRecipeBook.Exceptions {
             }
         }
         
-        internal static string VALIDATION_COOK_TIME_REQUIRED {
-            get {
-                return ResourceManager.GetString("VALIDATION_COOK_TIME_REQUIRED", resourceCulture);
-            }
-        }
-        
         internal static string VALIDATION_AT_LEAST_ONE_DISH_TYPE {
             get {
                 return ResourceManager.GetString("VALIDATION_AT_LEAST_ONE_DISH_TYPE", resourceCulture);
+            }
+        }
+        
+        internal static string VALIDATION_INSTRUCTION_ORDER_DUPLICATED {
+            get {
+                return ResourceManager.GetString("VALIDATION_INSTRUCTION_ORDER_DUPLICATED", resourceCulture);
+            }
+        }
+        
+        internal static string VALIDATION_AT_LEAST_ONE_INGREDIENT {
+            get {
+                return ResourceManager.GetString("VALIDATION_AT_LEAST_ONE_INGREDIENT", resourceCulture);
             }
         }
     }
