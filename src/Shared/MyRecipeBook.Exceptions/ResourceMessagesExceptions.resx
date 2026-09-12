@@ -93,4 +93,7 @@
     <data name="VALIDATION_AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
         <value>The recipe must include at least on ingredient</value>
     </data>
+    <data name="VALIDATION_NOT_FOUND_RECIPE" xml:space="preserve">
+        <value>This recipe could not be found.</value>
+    </data>
 </root>

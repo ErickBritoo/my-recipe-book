@@ -194,5 +194,11 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("VALIDATION_AT_LEAST_ONE_INGREDIENT", resourceCulture);
             }
         }
+        
+        public static string VALIDATION_NOT_FOUND_RECIPE {
+            get {
+                return ResourceManager.GetString("VALIDATION_NOT_FOUND_RECIPE", resourceCulture);
+            }
+        }
     }
 }
