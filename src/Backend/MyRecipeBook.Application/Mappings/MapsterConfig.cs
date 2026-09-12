@@ -1,5 +1,6 @@
 using Mapster;
 using MyRecipeBook.Communication.Requests;
+using MyRecipeBook.Communication.Responses;
 using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Enums;
 
@@ -29,8 +30,23 @@ public static class MapsterConfig
                     Description = instruction.Description
                 }));
 
-        
         TypeAdapterConfig<RequestRegisterUserJson, User>.NewConfig()
             .Ignore(destination => destination.Password);
+        
+        TypeAdapterConfig<Recipe, ResponseRecipeJson>.NewConfig()
+            .Map(destination => destination.Instructions, entity =>
+                entity.RecipeInstructions.Select(instruction => new ResponseInstructionJson()
+                {
+                    Description = instruction.Description,
+                    Order = instruction.Order
+                })
+            )
+            .Map(destination => destination.Ingredients, entity =>
+                entity.RecipeIngredients.Select(ingredients => new ResponseIngredientJson()
+                {
+                    Item = ingredients.Item
+                }))
+            .Map(destination => destination.DishTypes, entity =>
+                entity.RecipeDishTypes.Select(dishType => (MyRecipeBook.Communication.Enums.DishType)dishType.Type));
     }
 }

@@ -11,9 +11,7 @@ internal class MyRecipeBookDbContext : DbContext
     public DbSet<User> Users { get; init; }
     public DbSet<Recipe> Recipes { get; init; }
 
-    public MyRecipeBookDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
-    {
-    }
+    public MyRecipeBookDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,5 +25,7 @@ internal class MyRecipeBookDbContext : DbContext
             .HasConversion<string>();
         
         modelBuilder.Entity<Recipe>().Property(recipe => recipe.CookTime).HasConversion<string>();
+
+        modelBuilder.Entity<Recipe>().HasOne<User>().WithMany().HasForeignKey(recipe => recipe.UserId);
     }
 }
