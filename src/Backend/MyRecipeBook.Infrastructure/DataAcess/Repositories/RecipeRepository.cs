@@ -1,9 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using MyRecipeBook.Domain.Entities;
+using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.Recipe;
 
 namespace MyRecipeBook.Infrastructure.DataAcess.Repositories;
 
-internal class RecipeRepository : IRecipeWriteOnlyRepository
+internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
 {
     private readonly MyRecipeBookDbContext _dbContext;
 
@@ -11,6 +13,15 @@ internal class RecipeRepository : IRecipeWriteOnlyRepository
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task Add(Recipe recipe) => await _dbContext.Recipes.AddAsync(recipe);
+
+    public async Task<Recipe?> GetById(Guid recipeId, Guid userId) => await _dbContext.Recipes
+        .Include(recipe => recipe.RecipeDishTypes)
+        .Include(recipe => recipe.RecipeIngredients)
+        .Include(recipe => recipe.RecipeInstructions)
+        .FirstOrDefaultAsync(recipe =>
+            recipe.Active &&
+            recipe.Id == recipeId &&
+            recipe.UserId == userId);
 }
