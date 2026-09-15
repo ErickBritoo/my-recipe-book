@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyRecipeBook.Application.UseCases.Recipe.DeleteById;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
 using MyRecipeBook.Application.UseCases.Recipe.Register;
 using MyRecipeBook.Communication.Requests;
@@ -34,5 +35,18 @@ public class RecipesController : ControllerBase
         var result = await useCase.Execute(recipeId);
         
         return Ok(result);
+    }
+
+    [HttpDelete("{recipeId}")]
+    [ProducesResponseType(statusCode: StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteById(
+        [FromServices] IDeleteRecipeByIdUseCase useCase,
+        [FromRoute] Guid recipeId
+        )
+    {
+        await useCase.Execute(recipeId);
+
+        return NoContent();
     }
 }
