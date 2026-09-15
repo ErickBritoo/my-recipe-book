@@ -5,7 +5,7 @@ using MyRecipeBook.Domain.Repositories.Recipe;
 
 namespace MyRecipeBook.Infrastructure.DataAcess.Repositories;
 
-internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
+internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeDeleteOnlyRepository
 {
     private readonly MyRecipeBookDbContext _dbContext;
 
@@ -24,4 +24,13 @@ internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRep
             recipe.Active &&
             recipe.Id == recipeId &&
             recipe.UserId == userId);
+
+    public async Task<bool> DeleteById(Guid recipeId, Guid userId)
+    {
+        var rows = await _dbContext.Recipes
+            .Where(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == userId)
+            .ExecuteDeleteAsync();
+
+        return rows > 0;
+    }
 }
