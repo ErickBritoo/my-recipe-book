@@ -20,6 +20,7 @@ internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRep
         .Include(recipe => recipe.RecipeDishTypes)
         .Include(recipe => recipe.RecipeIngredients)
         .Include(recipe => recipe.RecipeInstructions)
+        .AsNoTracking()
         .FirstOrDefaultAsync(recipe =>
             recipe.Active &&
             recipe.Id == recipeId &&
