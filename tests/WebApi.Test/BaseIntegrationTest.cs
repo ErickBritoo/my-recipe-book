@@ -54,6 +54,15 @@ public class BaseIntegrationTest : IClassFixture<MyRecipeBookApplicationFactory>
         _httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd(culture);
     }
 
+    protected Task<HttpResponseMessage> Delete(string requestUri, CancellationToken cancellationToken,
+        string culture = "en", string acessToken = "")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizeRequest(acessToken);
+
+        return _httpClient.DeleteAsync(requestUri, cancellationToken);
+    }
+    
     private void AuthorizeRequest(string acessToken)
     {
         if (acessToken.IsNotEmpty())
