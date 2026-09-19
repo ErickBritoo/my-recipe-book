@@ -6,8 +6,7 @@ using MyRecipeBook.Domain.Repositories.Recipe;
 
 namespace MyRecipeBook.Infrastructure.DataAcess.Repositories;
 
-internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeDeleteOnlyRepository,
-    IRecipeUpdateOnlyRepository
+internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeDeleteOnlyRepository, IRecipeUpdateOnlyRepository
 {
     private readonly MyRecipeBookDbContext _dbContext;
 
@@ -26,6 +25,16 @@ internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRep
                 recipe.Active &&
                 recipe.Id == recipeId &&
                 recipe.UserId == userId);
+    }
+
+    public async Task<IList<Recipe>> GetRecents(Guid userId)
+    {
+        return await _dbContext.Recipes
+            .AsNoTracking()
+            .Where(recipe => recipe.UserId == userId)
+            .OrderByDescending(recipe => recipe.Id)
+            .Take(6)
+            .ToListAsync();
     }
 
     public async Task<bool> DeleteById(Guid recipeId, Guid userId)
