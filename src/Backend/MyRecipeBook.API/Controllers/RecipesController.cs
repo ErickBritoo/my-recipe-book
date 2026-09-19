@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyRecipeBook.Application.UseCases.Recipe.DeleteById;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
+using MyRecipeBook.Application.UseCases.Recipe.GetRecent;
 using MyRecipeBook.Application.UseCases.Recipe.Register;
 using MyRecipeBook.Application.UseCases.Recipe.Update;
 using MyRecipeBook.Communication.Requests;
@@ -64,5 +65,14 @@ public class RecipesController : ControllerBase
         await useCase.Execute(recipeId, request);
 
         return NoContent();
+    }
+
+    [HttpGet("recent")]
+    [ProducesResponseType(typeof(ResponseRecipesJson), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetRecentRecipes([FromServices] IGetRecentRecipesUseCase useCase)
+    {
+        var result = await useCase.Execute();
+
+        return Ok(result);
     }
 }
