@@ -17,4 +17,7 @@ public class RecipeReadOnlyRepositoryBuilder
     
     public void GetById(Recipe recipe) =>
         _mock.Setup(repository => repository.GetById(recipe.Id, recipe.UserId)).ReturnsAsync(recipe);
+
+    public void GetRecents(Guid userId, IList<Recipe> recipes) =>
+        _mock.Setup(repository => repository.GetRecents(userId)).ReturnsAsync(recipes);
 }
