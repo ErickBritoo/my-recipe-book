@@ -12,7 +12,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+      <ProjectReference Include="..\..\Shared\MyRecipeBook.Communication\MyRecipeBook.Communication.csproj" />
+      <ProjectReference Include="..\MyRecipeBook.Application\MyRecipeBook.Application.csproj" />
+      <ProjectReference Include="..\MyRecipeBook.Domain\MyRecipeBook.Domain.csproj" />
     </ItemGroup>
 
 </Project>
