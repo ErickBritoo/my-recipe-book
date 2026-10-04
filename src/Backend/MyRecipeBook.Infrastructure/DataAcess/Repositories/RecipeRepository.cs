@@ -1,0 +1,64 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using MyRecipeBook.Domain.Entities;
+using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Repositories.Recipe;
+
+namespace MyRecipeBook.Infrastructure.DataAcess.Repositories;
+
+internal class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeDeleteOnlyRepository, IRecipeUpdateOnlyRepository
+{
+    private readonly MyRecipeBookDbContext _dbContext;
+
+    public RecipeRepository(MyRecipeBookDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task Add(Recipe recipe) => await _dbContext.Recipes.AddAsync(recipe);
+
+    async Task<Recipe?> IRecipeReadOnlyRepository.GetById(Guid recipeId, Guid userId)
+    {
+        return await GetFullRecipe(recipeId, userId)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(recipe =>
+                recipe.Active &&
+                recipe.Id == recipeId &&
+                recipe.UserId == userId);
+    }
+
+    public async Task<IList<Recipe>> GetRecents(Guid userId)
+    {
+        return await _dbContext.Recipes
+            .AsNoTracking()
+            .Where(recipe => recipe.UserId == userId)
+            .OrderByDescending(recipe => recipe.Id)
+            .Take(6)
+            .ToListAsync();
+    }
+
+    public async Task<bool> DeleteById(Guid recipeId, Guid userId)
+    {
+        var rows = await _dbContext.Recipes
+            .Where(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == userId)
+            .ExecuteDeleteAsync();
+
+        return rows > 0;
+    }
+
+    async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(Guid recipeId, Guid userId)
+    {
+        return await GetFullRecipe(recipeId, userId).FirstOrDefaultAsync(recipe =>
+            recipe.Active &&
+            recipe.Id == recipeId &&
+            recipe.UserId == userId);
+    }
+
+    private IIncludableQueryable<Recipe, ICollection<RecipeInstruction>> GetFullRecipe(Guid recipeId, Guid userId)
+    {
+        return _dbContext.Recipes
+            .Include(recipe => recipe.RecipeDishTypes)
+            .Include(recipe => recipe.RecipeIngredients)
+            .Include(recipe => recipe.RecipeInstructions);
+    }
+}
