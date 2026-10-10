@@ -24,7 +24,7 @@ public class UsersController : ControllerBase
 
         return Created(string.Empty, result);
     }
-    
+
     [HttpGet]
     [Authorize]
     [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
@@ -35,7 +35,7 @@ public class UsersController : ControllerBase
 
         return Ok(result);
     }
-    
+
     [HttpPut("password")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -44,9 +44,9 @@ public class UsersController : ControllerBase
         [FromServices] IChangePasswordUseCase useCase,
         [FromBody] RequestChangePasswordJson request)
     {
-       await useCase.Execute(request);
+        await useCase.Execute(request);
 
-       return NoContent();
+        return NoContent();
     }
 
     [HttpPut("profile")]
@@ -58,7 +58,7 @@ public class UsersController : ControllerBase
         [FromBody] RequestUpdateUserJson request)
     {
         await useCase.Execute(request);
-        
+
         return NoContent();
     }
 }
