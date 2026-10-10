@@ -10,6 +10,7 @@ internal class MyRecipeBookDbContext : DbContext
 {
     public DbSet<User> Users { get; init; }
     public DbSet<Recipe> Recipes { get; init; }
+    public DbSet<VerificationCode> VerificationCodes { get; init; }
 
     public MyRecipeBookDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
     
@@ -31,5 +32,9 @@ internal class MyRecipeBookDbContext : DbContext
         modelBuilder.Entity<Recipe>().Property(recipe => recipe.CookTime).HasConversion<string>();
 
         modelBuilder.Entity<Recipe>().HasOne<User>().WithMany().HasForeignKey(recipe => recipe.UserId);
+        
+        modelBuilder.Entity<VerificationCode>().HasOne<User>().WithMany().HasForeignKey(code => code.UserId);
+
+        modelBuilder.Entity<VerificationCode>().Property(code => code.Type).HasConversion<string>();
     }
 }

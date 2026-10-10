@@ -7,6 +7,7 @@ using MyRecipeBook.Domain.Identity;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.Recipe;
 using MyRecipeBook.Domain.Repositories.User;
+using MyRecipeBook.Domain.Repositories.VerificationCode;
 using MyRecipeBook.Domain.Security.PasswordHashing;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Infrastructure.DataAcess;
@@ -60,6 +61,9 @@ public static class DependencyInjectionExtensions
             services.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
             services.AddScoped<IRecipeDeleteOnlyRepository, RecipeRepository>();
             services.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
+            
+            services.AddScoped<IVerificationCodeWriteOnlyRepository, VerificationCodeRepository>();
+            services.AddScoped<IVerificationCodeReadOnlyRepository, VerificationCodeRepository>();
         }
         
         private void AddTokensHandler(IConfiguration configuration)
