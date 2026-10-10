@@ -96,4 +96,7 @@
     <data name="VALIDATION_NOT_FOUND_RECIPE" xml:space="preserve">
         <value>No se pudo encontrar esta receta.</value>
     </data>
+    <data name="VERIFICATION_CODE_INVALID" xml:space="preserve">
+        <value>Código no válido o caducado</value>
+    </data>
 </root>

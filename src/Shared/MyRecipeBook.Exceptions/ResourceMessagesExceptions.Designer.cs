@@ -200,5 +200,11 @@ namespace MyRecipeBook.Exceptions {
                 return ResourceManager.GetString("VALIDATION_NOT_FOUND_RECIPE", resourceCulture);
             }
         }
+        
+        public static string VERIFICATION_CODE_INVALID {
+            get {
+                return ResourceManager.GetString("VERIFICATION_CODE_INVALID", resourceCulture);
+            }
+        }
     }
 }
